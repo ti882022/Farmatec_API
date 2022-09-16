@@ -1,0 +1,13 @@
+#Turn rewrite engine on
+Options +FollowSymlinks
+RewriteEngine on
+
+#map neat URL to internal URL
+
+RewriteRule ^funcionarios/incluir/$ controllers/ControleUsuarios.php?page_key=Incluir [QSA]
+RewriteRule ^funcionarios/listar/$ controllers/ControleUsuarios.php?page_key=Consultar [QSA]
+
+
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+

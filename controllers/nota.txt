@@ -1,0 +1,11 @@
+
+{   
+"txtnome":"Vito",
+"txtEmail":"vito@teste.com",
+"txtFone":"1234",
+"txtEndereco":"teste rua,12",
+"txtCidade":"São Paulo",
+"txtBairro":"teste",
+"txtUF":"SP",
+"txtCep":"14567890"
+    }
