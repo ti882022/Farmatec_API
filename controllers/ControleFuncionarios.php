@@ -12,15 +12,15 @@ $page_key="";
 class FuncionariosResHandler extends SimpleRest{
     public function FuncionariosIncluir(){
 
-        if(isset($_POST["txtnomeusuario"])) {
+        if(isset($_POST["txtnomefuncionario"])) {
 
             $nomefuncionario=$_POST["txtnomefuncionario"];
-            $sexofuncionario=$_POST["txtsexo"];
-            $fonefuncionario=$_POST['txtemailfuncionario'];
-            $emailfuncionario=$_POST['txtsenhafuncionario'];
+            $sexo=$_POST["txtsexo"];
+            $fonefuncionario=$_POST['txtfonefuncionario'];
+            $emailfuncionario=$_POST['txtemailfuncionario'];
 
-            $query="CALL spInserirFuncionarios(:pnome,:psexo,:pemail,:psenha)";
-            $array = array(":pnome"=>"{$nomefuncionario}",,":psexo"=>"{$sexofuncionario}",":pfone"=>"{$fonefuncionario}",":pemail"=>"{$emailfuncionario}");
+            $query="CALL spInserirFuncionarios(:pnome,:psexo,:pfone,:pemail)";
+            $array = array(":pnome"=>"{$nomefuncionario}",":psexo"=>"{$sexo}",":pfone"=>"{$fonefuncionario}",":pemail"=>"{$emailfuncionario}");
              //Instanciar a classe BdTurmaConnect
              $dbcontroller = new BdturmaConect();
 
@@ -53,7 +53,7 @@ class FuncionariosResHandler extends SimpleRest{
 
         if(!empty($_POST["txtnomefuncionario"])){
 
-            $nome = $_POST["txtfuncionario"];
+            $nome = $_POST["txtnomefuncionario"];
         //Informar a Stored Produre e seus Parâmetros
         $query="CALL spConsultarFuncionarios(:pnome)";
         //Definir o conjunto de dados
@@ -128,8 +128,6 @@ switch($page_key){
         $Funcionarios = new FuncionariosResHandler();
         $Funcionarios -> FuncionariosIncluir();
         break;
-        
-
 }
 
 ?>
