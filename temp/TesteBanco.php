@@ -18,7 +18,7 @@ $conexao ="";
 $host = "localhost";
 $user = "root";
 $password = "";
-$database = "bdxxx";
+$database = "bdfarmacia";
 function connectDB() {
     $GLOBALS['conexao'] = mysqli_connect($GLOBALS['host'], $GLOBALS['user'], $GLOBALS['password'], 
     $GLOBALS['database']);

@@ -31,7 +31,6 @@ class BdTurmaConect{
             echo "Mensagem:". utf8_encode($e->getMessage())."\n";
         }
 
-
     }
     function disconnectDB(){
         $this -> conn = NULL;
