@@ -12,14 +12,17 @@ $page_key="";
 class UsuariosResHandler extends SimpleRest{
     public function UsuariosIncluir(){
 
-        if(isset($_POST["txtnomeusuario"])) {
+        if(isset($_POST["txtnome"])) {
 
-            $nomeusuario=$_POST["txtnomeusuario"];
-            $emailusuario=$_POST['txtemailusuario'];
-            $senhausuario=$_POST['txtsenhausuario'];
+            $nome=$_POST["txtnome"];
+            $usuario=$_POST['txtusuario'];
+            $senha=$_POST['txtsenha'];
+            $email=$_POST['txtemail'];
+            $classe=$_POST['txtclasseusuario'];
+            $logado=$_POST['txtlogado'];
 
-            $query="CALL spInserirusuarios(:pusuario,:pemail,:psenha)";
-            $array = array(":pusuario"=>"{$nomeusuario}",":pemail"=>"{$emailusuario}",":psenha"=>"{$senhausuario}");
+            $query="CALL spInserirUsuarios(:pnome,:pusuario,:psenha,:pemail,:pclasseusuario,:plogado)";
+            $array = array(":pnome"=>"{$nome}",":pusuario"=>"{$usuario}",":psenha"=>"{$senha}",":pemail"=>"{$email}",":pclasseusuario"=>"{$classe}",":plogado"=>"{$logado}");
              //Instanciar a classe BdTurmaConnect
              $dbcontroller = new BdturmaConect();
 
@@ -50,13 +53,13 @@ class UsuariosResHandler extends SimpleRest{
 
     public function UsuarioConsultar(){
 
-        if(!empty($_POST["txtnomeusuario"])){
+        if(!empty($_POST["txtusuario"])){
 
-            $nome = $_POST["txtnomeusuario"];
+            $usuario = $_POST["txtusuario"];
         //Informar a Stored Produre e seus Parâmetros
-        $query="CALL spConsultarusuario (:pnomeusuario)";
+        $query="CALL spConsultarUsuarios(:pusuario)";
         //Definir o conjunto de dados
-        $array = array(":pnomeusuario"=>"{$nome}");
+        $array = array(":pusuario"=>"{$usuario}");
             //Instanciar a classe BdTurmaConect
             $dbcontroller = new BdturmaConect ();
             //Chamar o método
@@ -84,18 +87,18 @@ class UsuariosResHandler extends SimpleRest{
 
     }
 
-    public function UserValidar(){
+    public function UsuariosValidar(){
 
-        if(!empty($_POST["txtnomeusuario"])){
+        if(!empty($_POST["txtusuario"])){
 
-            $nome = $_POST["txtnomeusuario"];
-            $senha = $_POST["txtsenhausuario"];
+            $usuario = $_POST["txtusuario"];
+            $senha = $_POST["txtsenha"];
 
         //Informar a Stored Produre e seus Parâmetros
-        $query="CALL spValidarUsuario (:pNomeUsuario,:pSenhaUsuario)";
+        $query="CALL spValidarUsuarios(:pusuario,:psenha)";
 
         //Definir o conjunto de dados
-        $array = array(":pNomeUsuario"=>"{$nome}",":pSenhaUsuario"=>"{$senha}");
+        $array = array(":pusuario"=>"{$usuario}",":psenha"=>"{$senha}");
 
             //Instanciar a classe BdTurmaConect
             $dbcontroller = new BdturmaConect ();
@@ -126,18 +129,18 @@ class UsuariosResHandler extends SimpleRest{
 
     }
 
-    public function UserLogout(){
+    public function UsuariosLogout(){
 
-        if(!empty($_POST["txtnomecompleto"])){
+        if(!empty($_POST["txtnome"])){
 
-            $nome = $_POST["txtnomecompleto"];
-            $email = $_POST["txtemailusuario"];
+            $nome = $_POST["txtnome"];
+            $email = $_POST["txtemail"];
 
         //Informar a Stored Produre e seus Parâmetros
-        $query="CALL spLogoutUsuario (:pnomecompleto,:pemailusuario)";
+        $query="CALL spDesconectarUsuarios(:pnome,:pemail)";
 
         //Definir o conjunto de dados
-        $array = array(":pnomecompleto"=>"{$nome}",":pemailusuario"=>"{$email}");
+        $array = array(":pnome"=>"{$nome}",":pemail"=>"{$email}");
 
             //Instanciar a classe BdTurmaConect
             $dbcontroller = new BdturmaConect ();
@@ -170,18 +173,18 @@ class UsuariosResHandler extends SimpleRest{
 
     public function TrocaSenha(){
 
-        if(!empty($_POST["txtnomeusuario"])){
+        if(!empty($_POST["txtnome"])){
 
-            $nome = $_POST["txtnomeusuario"];
-            $email = $_POST["txtemailusuario"];
-            $senha = $_POST["txtsenhausuario"];
+            $nome = $_POST["txtnome"];
+            $email = $_POST["txtemail"];
+            $senha = $_POST["txtsenha"];
             $senhanova = $_POST["txtsenhanova"];
 
         //Informar a Stored Produre e seus Parâmetros
-        $query="CALL spTrocaSenha (:pnomeusuario,:pemailusuario,:psenhausuario,:psenhanova)";
+        $query="CALL spTrocarSenha(:pnome,:pemail,:psenha,:psenhanova)";
 
         //Definir o conjunto de dados
-        $array = array(":pnomeusuario"=>"{$nome}",":pemailusuario"=>"{$email}",":psenhausuario"=>"{$senha}",":psenhanova"=>"{$senhanova}");
+        $array = array(":pnome"=>"{$nome}",":pemail"=>"{$email}",":psenha"=>"{$senha}",":psenhanova"=>"{$senhanova}");
 
             //Instanciar a classe BdTurmaConect
             $dbcontroller = new BdturmaConect ();
@@ -261,13 +264,13 @@ switch($page_key){
         case "Validar":
             //esta passando o conteudo(instanciando) do UsuariosResHandler para o $Usuarios
             $Usuarios = new UsuariosResHandler();
-            $Usuarios -> UserValidar();
+            $Usuarios -> UsuariosValidar();
             break;
 
-            case "Logout":
+            case "Deslogar":
                 //esta passando o conteudo(instanciando) do UsuariosResHandler para o $Usuarios
                 $Usuarios = new UsuariosResHandler();
-                $Usuarios -> UserLogout();
+                $Usuarios -> UsuariosLogout();
                 break;
 
                 case "Trocar":
