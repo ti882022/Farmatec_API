@@ -119,9 +119,7 @@ class ProdutosResHandler extends SimpleRest{
             if(strpos($requestContentType,'application/Json')!== false){
                 $response = $this -> encodeJson($Result);
                 echo $response;
-
             }
-
         }
     }
 
@@ -157,36 +155,23 @@ if(isset($_POST["btnEnviar"])) {
 
 switch($page_key){
 
-    case "Consultar":
-        //esta passando o conteudo(instanciando) do UsuariosResHandler para o $Usuarios
-        $Usuarios = new UsuariosResHandler();
-        $Usuarios -> UsuarioConsultar();
-        break;
-
     case "Incluir":
-        //esta passando o conteudo(instanciando) do UsuariosResHandler para o $Usuarios
-        $Usuarios = new UsuariosResHandler();
-        $Usuarios -> UsuariosIncluir();
+        //esta passando o conteudo(instanciando) do ProdutosResHandler para o $Usuarios
+        $Produtos = new ProdutosResHandler();
+        $Produtos -> PedidosIncluir();
         break;
 
-        case "Validar":
-            //esta passando o conteudo(instanciando) do UsuariosResHandler para o $Usuarios
-            $Usuarios = new UsuariosResHandler();
-            $Usuarios -> UsuariosValidar();
-            break;
+    case "Movimentar":
+        //esta passando o conteudo(instanciando) do ProdutosResHandler para o $Usuarios
+        $Produtos = new ProdutosResHandler();
+        $Produtos -> EstoqueMovimentar();
+        break;
 
-            case "Deslogar":
-                //esta passando o conteudo(instanciando) do UsuariosResHandler para o $Usuarios
-                $Usuarios = new UsuariosResHandler();
-                $Usuarios -> UsuariosLogout();
-                break;
-
-                case "Trocar":
-                    //esta passando o conteudo(instanciando) do UsuariosResHandler para o $Usuarios
-                    $Usuarios = new UsuariosResHandler();
-                    $Usuarios -> TrocaSenha();
-                    break;   
-        
+    case "Consultar":
+        //esta passando o conteudo(instanciando) do ProdutosResHandler para o $Usuarios
+        $Produtos = new ProdutosResHandler();
+        $Produtos -> ProdutosConsultar();
+        break;      
 
 }
 
