@@ -132,7 +132,6 @@ class ProdutosResHandler extends SimpleRest{
     }
 }
 
-    
     if(isset($_GET["page_key"])){
         $page_key = $_GET["page_key"];
     }
