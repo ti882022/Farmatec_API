@@ -15,6 +15,9 @@ RewriteRule ^usuarios/listar/$ controllers/ControleUsuarios.php?page_key=Consult
 RewriteRule ^usuarios/conectar/$ controllers/ControleUsuarios.php?page_key=Validar [QSA]
 RewriteRule ^usuarios/desconectar/$ controllers/ControleUsuarios.php?page_key=Deslogar [QSA]
 RewriteRule ^usuarios/trocar/$ controllers/ControleUsuarios.php?page_key=Trocar [QSA]
+RewriteRule ^produtos/incluir/$ controllers/ControleProdutos.php?page_key=Incluir [QSA]
+RewriteRule ^produtos/movimentar/$ controllers/ControleProdutos.php?page_key=Movimentar [QSA]
+RewriteRule ^produtos/listar/$ controllers/ControleProdutos.php?page_key=Consultar [QSA]
 
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
