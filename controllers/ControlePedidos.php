@@ -9,7 +9,7 @@ require_once("../config/SimpleRest.php");
 
 $page_key="";
 // termo extends pega emprestado o conteudo do arquivo 1 pra o 2
-class ProdutosResHandler extends SimpleRest{
+class PedidosResHandler extends SimpleRest{
     public function PedidosIncluir(){
 
         if(isset($_POST["txtnome"])) {
@@ -50,78 +50,6 @@ class ProdutosResHandler extends SimpleRest{
 
     }
 
-    public function EstoqueMovimentar(){
-
-        if(!empty($_POST["txtcodprod"])){
-
-            $status = $_POST["txtstatus"];
-            $produto = $_POST["txtcodprod"];
-            $qtde = $_POST["txtqtde"];
-            $descricao = $_POST["txtdesc"];
-        //Informar a Stored Produre e seus Parâmetros
-        $query="CALL spMovimentarEstoque(:pstatus,:pcodigoprod,:pqtde,:pdescricao)";
-        //Definir o conjunto de dados
-        $array = array(":pstatus"=>"{$status}",":pcodigoprod"=>"{$produto}",":pqtde"=>"{$qtde}",":pdescricao"=>"{$descricao}");
-            //Instanciar a classe BdTurmaConect
-            $dbcontroller = new BdturmaConect ();
-            //Chamar o método
-            $rawData = $dbcontroller->executeProcedure($query,$array);
-            //Verificar se o retorno está "Vazio"
-            if(empty($rawData)){
-                $statusCode = 404;
-                $rawData = array('sucesso'=> 0);
-            }
-            else{
-                $statusCode = 200;
-                $rawData = array('sucesso'=> 1);
-            }
-            $requestContentType = $_POST['HTTP_ACCEPT'];
-            $this ->setHttpHeaders($requestContentType, $statusCode);
-
-            $Result["RetornoDados"] = $rawData;
-
-            if(strpos($requestContentType,'application/Json')!== false){
-                $response = $this -> encodeJson($Result);
-                echo $response;
-
-            }
-
-        }
-
-    }
-
-    public function ProdutosConsultar(){
-
-        if(!empty($_POST["txtnomecodprod"])){
-
-            $categoria = $_POST["txtnomecodprod"];
-        //Informar a Stored Produre e seus Parâmetros
-        $query="CALL spConsultarProdutos(:pcategoria)";
-        //Definir o conjunto de dados
-        $array = array(":pcategoria"=>"{$categoria}");
-            //Instanciar a classe BdTurmaConect
-            $dbcontroller = new BdturmaConect ();
-            //Chamar o método
-            $rawData = $dbcontroller->executeProcedure($query,$array);
-            //Verificar se o retorno está "Vazio"
-            if(empty($rawData)){
-                $statusCode = 404;
-                $rawData = array('sucesso'=> 0);
-            }
-            else{
-                $statusCode = 200;
-            }
-            $requestContentType = $_POST['HTTP_ACCEPT'];
-            $this ->setHttpHeaders($requestContentType, $statusCode);
-
-            $Result["RetornoDados"] = $rawData;
-
-            if(strpos($requestContentType,'application/Json')!== false){
-                $response = $this -> encodeJson($Result);
-                echo $response;
-            }
-        }
-    }
 
     public function encodeJson($responseData){
         $JsonResponse = json_encode($responseData);
@@ -156,22 +84,10 @@ if(isset($_POST["btnEnviar"])) {
 switch($page_key){
 
     case "Incluir":
-        //esta passando o conteudo(instanciando) do ProdutosResHandler para o $Usuarios
-        $Produtos = new ProdutosResHandler();
-        $Produtos -> PedidosIncluir();
-        break;
-
-    case "Movimentar":
-        //esta passando o conteudo(instanciando) do ProdutosResHandler para o $Usuarios
-        $Produtos = new ProdutosResHandler();
-        $Produtos -> EstoqueMovimentar();
-        break;
-
-    case "Consultar":
-        //esta passando o conteudo(instanciando) do ProdutosResHandler para o $Usuarios
-        $Produtos = new ProdutosResHandler();
-        $Produtos -> ProdutosConsultar();
-        break;      
+        //esta passando o conteudo(instanciando) do PedidosResHandler para o $Usuarios
+        $Pedidos = new PedidosResHandler();
+        $Pedidos -> PedidosIncluir();
+        break;     
 
 }
 
