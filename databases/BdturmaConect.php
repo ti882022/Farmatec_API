@@ -104,8 +104,6 @@ class BdTurmaConect{
             return $resultado;
         }
 
-
-
         function executeProcedureOut($query,$array,$final){
             try{
                $conn = $this->connectDB();
