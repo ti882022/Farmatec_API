@@ -18,6 +18,8 @@ RewriteRule ^usuarios/trocar/$ controllers/ControleUsuarios.php?page_key=Trocar 
 RewriteRule ^produtos/incluir/$ controllers/ControleProdutos.php?page_key=Incluir [QSA]
 RewriteRule ^produtos/movimentar/$ controllers/ControleProdutos.php?page_key=Movimentar [QSA]
 RewriteRule ^produtos/listar/$ controllers/ControleProdutos.php?page_key=Consultar [QSA]
+RewriteRule ^pedidos/incluir/$ controllers/ControlePedidos.php?page_key=Incluir [QSA]
+RewriteRule ^pedidos/listar/$ controllers/ControlePedidos.php?page_key=Consultar [QSA]
 
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
