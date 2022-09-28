@@ -126,6 +126,42 @@ class ProdutosResHandler extends SimpleRest{
         }
     }
 
+    public function AtualizarPreco(){
+            if(!empty($_POST["txtcodprod"])){
+
+            $codprod = $_POST["txtcodprod"];
+            $preco = $_POST["txtpreco"];
+        //Informar a Stored Produre e seus Parâmetros
+        $query="CALL spAtualizarPreco(:pcodprod,:ppreco)";
+        //Definir o conjunto de dados
+        $array = array(":pcodprod"=>"{$codprod}",":ppreco"=>"{$preco}");
+            //Instanciar a classe BdTurmaConect
+            $dbcontroller = new BdturmaConect ();
+            //Chamar o método
+            $rawData = $dbcontroller->executeProcedure($query,$array);
+            //Verificar se o retorno está "Vazio"
+            if(empty($rawData)){
+                $statusCode = 404;
+                $rawData = array('sucesso'=> 0);
+            }
+            else{
+                $statusCode = 200;
+                $rawData = array('sucesso'=> 1);
+            }
+            $requestContentType = $_POST['HTTP_ACCEPT'];
+            $this ->setHttpHeaders($requestContentType, $statusCode);
+
+            $Result["RetornoDados"] = $rawData;
+
+            if(strpos($requestContentType,'application/Json')!== false){
+                $response = $this -> encodeJson($Result);
+                echo $response;
+
+            }
+
+        }
+    }
+
     public function encodeJson($responseData){
         $JsonResponse = json_encode($responseData);
         return $JsonResponse;
@@ -174,6 +210,11 @@ switch($page_key){
         $Produtos = new ProdutosResHandler();
         $Produtos -> ProdutosConsultar();
         break;      
+    case "Atualizar":
+        //esta passando o conteudo(instanciando) do ProdutosResHandler para o $Usuarios
+        $Produtos = new ProdutosResHandler();
+        $Produtos -> AtualizarPreco();
+        break;  
 
 }
 
