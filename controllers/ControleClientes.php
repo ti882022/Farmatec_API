@@ -59,10 +59,11 @@ class ClientesResHandler extends SimpleRest{
         if(!empty($_POST["txtnomeCliente"])){
 
             $nome = $_POST["txtnomeCliente"];
+            $cpf = $_POST["txtcpfCliente"];
         //Informar a Stored Produre e seus Parâmetros
-        $query="CALL spConsultarClientes(:pnome)";
+        $query="CALL spConsultarClientes(:pnome,:pcpf)";
         //Definir o conjunto de dados
-        $array = array(":pnome"=>"{$nome}");
+        $array = array(":pnome"=>"{$nome}",":pcpf"=>"{$cpf}");
             //Instanciar a classe BdTurmaConect
             $dbcontroller = new BdturmaConect ();
             //Chamar o método
