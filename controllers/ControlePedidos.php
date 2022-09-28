@@ -56,7 +56,7 @@ class PedidosResHandler extends SimpleRest{
             $numpedido = $_POST["txtnumpedido"];
             $cpf = $_POST["txtcpf"];
 
-        $query="CALL spConsultarUsuarios(:npedido,:pcpf)";
+        $query="CALL spConsultarPedidos(:npedido,:pcpf)";
         $array = array(":npedido"=>"{$numpedido}",":pcpf"=>"{$cpf}");
             $dbcontroller = new BdturmaConect ();
             $rawData = $dbcontroller->executeProcedure($query,$array);
