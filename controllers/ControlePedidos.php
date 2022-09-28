@@ -50,6 +50,36 @@ class PedidosResHandler extends SimpleRest{
 
     }
 
+    public function PedidosConsultar(){
+        if(!empty($_POST["txtnumpedido"])){
+
+            $numpedido = $_POST["txtnumpedido"];
+            $cpf = $_POST["txtcpf"];
+
+        $query="CALL spConsultarUsuarios(:npedido,:pcpf)";
+        $array = array(":npedido"=>"{$numpedido}",":pcpf"=>"{$cpf}");
+            $dbcontroller = new BdturmaConect ();
+            $rawData = $dbcontroller->executeProcedure($query,$array);
+            if(empty($rawData)){
+                $statusCode = 404;
+                $rawData = array('sucesso'=> 0);
+            }
+            else{
+                $statusCode = 200;
+            }
+            $requestContentType = $_POST['HTTP_ACCEPT'];
+            $this ->setHttpHeaders($requestContentType, $statusCode);
+
+            $Result["RetornoDados"] = $rawData;
+
+            if(strpos($requestContentType,'application/Json')!== false){
+                $response = $this -> encodeJson($Result);
+                echo $response;
+
+            }
+
+        }
+    }
 
     public function encodeJson($responseData){
         $JsonResponse = json_encode($responseData);
@@ -87,7 +117,12 @@ switch($page_key){
         //esta passando o conteudo(instanciando) do PedidosResHandler para o $Usuarios
         $Pedidos = new PedidosResHandler();
         $Pedidos -> PedidosIncluir();
-        break;     
+        break; 
+    case "Consultar":
+        //esta passando o conteudo(instanciando) do UsuariosResHandler para o $Usuarios
+        $Usuarios = new UsuariosResHandler();
+        $Usuarios -> UsuarioConsultar();
+        break;  
 
 }
 
