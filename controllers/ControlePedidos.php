@@ -120,8 +120,8 @@ switch($page_key){
         break; 
     case "Consultar":
         //esta passando o conteudo(instanciando) do UsuariosResHandler para o $Usuarios
-        $Usuarios = new UsuariosResHandler();
-        $Usuarios -> UsuarioConsultar();
+        $Pedidos = new PedidosResHandler();
+        $Pedidos -> PedidosConsultar();
         break;  
 
 }
