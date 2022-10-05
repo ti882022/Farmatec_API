@@ -48,7 +48,6 @@ class FuncionariosResHandler extends SimpleRest{
             }
 
         }
-
     }
 
     public function FuncionariosConsultar(){
