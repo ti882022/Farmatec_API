@@ -18,9 +18,11 @@ class FuncionariosResHandler extends SimpleRest{
             $sexo=$_POST["txtsexo"];
             $fonefuncionario=$_POST['txtfonefuncionario'];
             $emailfuncionario=$_POST['txtemailfuncionario'];
+            $classe=$_POST['txtclassefunc'];
+            $usuario=$_POST['txtusuario'];
 
-            $query="CALL spInserirFuncionarios(:pnome,:psexo,:pfone,:pemail)";
-            $array = array(":pnome"=>"{$nomefuncionario}",":psexo"=>"{$sexo}",":pfone"=>"{$fonefuncionario}",":pemail"=>"{$emailfuncionario}");
+            $query="CALL spInserirFuncionarios(:pnome,:psexo,:pfone,:pemail,:pclasse,:pusuario)";
+            $array = array(":pnome"=>"{$nomefuncionario}",":psexo"=>"{$sexo}",":pfone"=>"{$fonefuncionario}",":pemail"=>"{$emailfuncionario}",":pclasse"=>"{$classe}",":pusuario"=>"{$usuario}");
              //Instanciar a classe BdTurmaConnect
              $dbcontroller = new BdturmaConect();
 
@@ -46,7 +48,6 @@ class FuncionariosResHandler extends SimpleRest{
             }
 
         }
-
     }
 
     public function FuncionariosConsultar(){
