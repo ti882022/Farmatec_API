@@ -23,9 +23,12 @@ class ClientesResHandler extends SimpleRest{
             $cpf=$_POST["txtcpf"];
             $foneCliente=$_POST['txtfoneCliente'];
             $emailCliente=$_POST['txtemailCliente'];
+            $usuario=$_POST['txtusuario'];
+            $senha=$_POST['txtsenha'];
+            $logado=$_POST['txtlogado'];
 
-            $query="CALL spInserirClientes(:pnome,:pendereco,:pcep,:pcidade,:pbairro,:puf,:pcpf,:pfone,:pemail)";
-            $array = array(":pnome"=>"{$nomeCliente}",":pendereco"=>"{$endereco}",":pcep"=>"{$cep}",":pcidade"=>"{$cidade}",":pbairro"=>"{$bairro}",":puf"=>"{$uf}",":pcpf"=>"{$cpf}",":pfone"=>"{$foneCliente}",":pemail"=>"{$emailCliente}");
+            $query="CALL spInserirClientes(:pnome,:pendereco,:pcep,:pcidade,:pbairro,:puf,:pcpf,:pfone,:pemail,:pusuario,:psenha,:plogado)";
+            $array = array(":pnome"=>"{$nomeCliente}",":pendereco"=>"{$endereco}",":pcep"=>"{$cep}",":pcidade"=>"{$cidade}",":pbairro"=>"{$bairro}",":puf"=>"{$uf}",":pcpf"=>"{$cpf}",":pfone"=>"{$foneCliente}",":pemail"=>"{$emailCliente}",":pusuario"=>"{$usuario}",":psenha"=>"{$senha}",":plogado"=>"{$logado}");
              //Instanciar a classe BdTurmaConnect
              $dbcontroller = new BdturmaConect();
 
