@@ -10,6 +10,7 @@ require_once("../config/SimpleRest.php");
 $page_key="";
 // termo extends pega emprestado o conteudo do arquivo 1 pra o 2
 class PedidosResHandler extends SimpleRest{
+
     public function PedidosIncluir(){
 
         if(isset($_POST["txtnome"])) {
@@ -23,12 +24,10 @@ class PedidosResHandler extends SimpleRest{
             $query="CALL spInserirPedidos(:pnome,:pcanal,:pforma,:pcodigofuncionario,:pproduto,@pnumeropedido)";
             $array = array(":pnome"=>"{$nome}",":pcanal"=>"{$canal}",":pforma"=>"{$forma}",":pcodigofuncionario"=>"{$codfuncionario}",":pproduto"=>"{$produto}");
             $final = "SELECT @pnumeropedido as numeropedido";
-            //Instanciar a classe BdTurmaConnect
              $dbcontroller = new BdturmaConect();
 
              $rawData = $dbcontroller->executeProcedureOut($query,$array,$final);
             
-            //Verificar se o retorno esta "vazio"
             if(empty($rawData)){
                 $statusCode = 404;
                 $rawData = array('sucesso' => 0);
@@ -114,21 +113,13 @@ if(isset($_POST["btnEnviar"])) {
 switch($page_key){
 
     case "Incluir":
-        //esta passando o conteudo(instanciando) do PedidosResHandler para o $Usuarios
         $Pedidos = new PedidosResHandler();
         $Pedidos -> PedidosIncluir();
         break; 
     case "Consultar":
-        //esta passando o conteudo(instanciando) do UsuariosResHandler para o $Usuarios
         $Pedidos = new PedidosResHandler();
         $Pedidos -> PedidosConsultar();
-        break;  
-
+        break;
 }
-
-
-
-
-
 
 ?>

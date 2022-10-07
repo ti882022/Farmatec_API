@@ -10,6 +10,7 @@ require_once("../config/SimpleRest.php");
 $page_key="";
 // termo extends pega emprestado o conteudo do arquivo 1 pra o 2
 class FornecedoresResHandler extends SimpleRest{
+
     public function FornecedoresIncluir(){
 
         if(isset($_POST["txtnomeFornecedor"])) {
@@ -95,8 +96,7 @@ class FornecedoresResHandler extends SimpleRest{
         return $JsonResponse;
     }
 }
-
-    
+ 
     if(isset($_GET["page_key"])){
         $page_key = $_GET["page_key"];
     }
@@ -123,13 +123,11 @@ if(isset($_POST["btnEnviar"])) {
 switch($page_key){
 
     case "Consultar":
-        //esta passando o conteudo(instanciando) do UsuariosResHandler para o $Usuarios
         $Fornecedores = new FornecedoresResHandler();
         $Fornecedores -> FornecedoresConsultar();
         break;
 
     case "Incluir":
-        //esta passando o conteudo(instanciando) do UsuariosResHandler para o $Usuarios
         $Fornecedores = new FornecedoresResHandler();
         $Fornecedores -> FornecedoresIncluir();
         break;
