@@ -8,8 +8,9 @@ require_once("../databases/BdturmaConect.php");
 require_once("../config/SimpleRest.php");
 
 $page_key="";
-// termo extends pega emprestado o conteudo do arquivo 1 pra o 2
+
 class ProdutosResHandler extends SimpleRest{
+
     public function ProdutosIncluir(){
 
         if(isset($_POST["txtdescricao"])) {
@@ -34,10 +35,11 @@ class ProdutosResHandler extends SimpleRest{
             //Verificar se o retorno esta "vazio"
             if(empty($rawData)){
                 $statusCode = 404;
-                $rawData = array('sucesso' => 0);
+                $rawData = array('codigo' => 0);
             }
             else{
                 $statusCode = 200;
+                $rawData = array('codigo' => 1);
             }
             
             $requestContentType = $_POST['HTTP_ACCEPT'];
@@ -194,33 +196,25 @@ if(isset($_POST["btnEnviar"])) {
 switch($page_key){
 
     case "Incluir":
-        //esta passando o conteudo(instanciando) do ProdutosResHandler para o $Usuarios
         $Produtos = new ProdutosResHandler();
         $Produtos -> ProdutosIncluir();
         break;
 
     case "Movimentar":
-        //esta passando o conteudo(instanciando) do ProdutosResHandler para o $Usuarios
         $Produtos = new ProdutosResHandler();
         $Produtos -> EstoqueMovimentar();
         break;
 
     case "Consultar":
-        //esta passando o conteudo(instanciando) do ProdutosResHandler para o $Usuarios
         $Produtos = new ProdutosResHandler();
         $Produtos -> ProdutosConsultar();
-        break;      
+        break;  
+
     case "Atualizar":
-        //esta passando o conteudo(instanciando) do ProdutosResHandler para o $Usuarios
         $Produtos = new ProdutosResHandler();
         $Produtos -> AtualizarPreco();
         break;  
 
 }
-
-
-
-
-
 
 ?>

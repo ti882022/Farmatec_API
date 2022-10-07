@@ -10,6 +10,7 @@ require_once("../config/SimpleRest.php");
 $page_key="";
 // termo extends pega emprestado o conteudo do arquivo 1 pra o 2
 class ClientesResHandler extends SimpleRest{
+
     public function ClientesIncluir(){
 
         if(isset($_POST["txtnomeCliente"])) {
@@ -100,7 +101,6 @@ class ClientesResHandler extends SimpleRest{
     }
 }
 
-    
     if(isset($_GET["page_key"])){
         $page_key = $_GET["page_key"];
     }
@@ -127,13 +127,11 @@ if(isset($_POST["btnEnviar"])) {
 switch($page_key){
 
     case "Consultar":
-        //esta passando o conteudo(instanciando) do UsuariosResHandler para o $Usuarios
         $Clientes = new ClientesResHandler();
         $Clientes -> ClientesConsultar();
         break;
 
     case "Incluir":
-        //esta passando o conteudo(instanciando) do UsuariosResHandler para o $Usuarios
         $Clientes = new ClientesResHandler();
         $Clientes -> ClientesIncluir();
         break;

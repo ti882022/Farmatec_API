@@ -10,6 +10,7 @@ require_once("../config/SimpleRest.php");
 $page_key="";
 // termo extends pega emprestado o conteudo do arquivo 1 pra o 2
 class FuncionariosResHandler extends SimpleRest{
+
     public function FuncionariosIncluir(){
 
         if(isset($_POST["txtnomefuncionario"])) {
@@ -119,13 +120,11 @@ if(isset($_POST["btnEnviar"])) {
 switch($page_key){
 
     case "Consultar":
-        //esta passando o conteudo(instanciando) do UsuariosResHandler para o $Usuarios
         $Funcionarios = new FuncionariosResHandler();
         $Funcionarios -> FuncionariosConsultar();
         break;
 
     case "Incluir":
-        //esta passando o conteudo(instanciando) do UsuariosResHandler para o $Usuarios
         $Funcionarios = new FuncionariosResHandler();
         $Funcionarios -> FuncionariosIncluir();
         break;

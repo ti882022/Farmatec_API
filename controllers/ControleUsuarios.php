@@ -10,6 +10,7 @@ require_once("../config/SimpleRest.php");
 $page_key="";
 // termo extends pega emprestado o conteudo do arquivo 1 pra o 2
 class UsuariosResHandler extends SimpleRest{
+
     public function UsuariosIncluir(){
 
         if(isset($_POST["txtnome"])) {
@@ -215,8 +216,6 @@ class UsuariosResHandler extends SimpleRest{
 
     }
 
-    
-
     public function encodeJson($responseData){
         $JsonResponse = json_encode($responseData);
         return $JsonResponse;
@@ -250,41 +249,29 @@ if(isset($_POST["btnEnviar"])) {
 switch($page_key){
 
     case "Consultar":
-        //esta passando o conteudo(instanciando) do UsuariosResHandler para o $Usuarios
         $Usuarios = new UsuariosResHandler();
         $Usuarios -> UsuarioConsultar();
         break;
 
     case "Incluir":
-        //esta passando o conteudo(instanciando) do UsuariosResHandler para o $Usuarios
         $Usuarios = new UsuariosResHandler();
         $Usuarios -> UsuariosIncluir();
         break;
 
-        case "Validar":
-            //esta passando o conteudo(instanciando) do UsuariosResHandler para o $Usuarios
-            $Usuarios = new UsuariosResHandler();
-            $Usuarios -> UsuariosValidar();
-            break;
+    case "Validar":
+        $Usuarios = new UsuariosResHandler();
+        $Usuarios -> UsuariosValidar();
+        break;
 
-            case "Deslogar":
-                //esta passando o conteudo(instanciando) do UsuariosResHandler para o $Usuarios
-                $Usuarios = new UsuariosResHandler();
-                $Usuarios -> UsuariosLogout();
-                break;
+    case "Deslogar":
+        $Usuarios = new UsuariosResHandler();
+        $Usuarios -> UsuariosLogout();
+        break;
 
-                case "Trocar":
-                    //esta passando o conteudo(instanciando) do UsuariosResHandler para o $Usuarios
-                    $Usuarios = new UsuariosResHandler();
-                    $Usuarios -> TrocaSenha();
-                    break;   
-        
-
+    case "Trocar":
+        $Usuarios = new UsuariosResHandler();
+        $Usuarios -> TrocaSenha();
+        break;   
 }
-
-
-
-
-
 
 ?>
