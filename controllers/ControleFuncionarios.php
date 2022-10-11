@@ -53,7 +53,7 @@ class FuncionariosResHandler extends SimpleRest{
 
     public function FuncionariosConsultar(){
 
-        if(!empty($_POST["txtnomefuncionario"])){
+        if(isset($_POST["txtnomefuncionario"])){
 
             $nome = $_POST["txtnomefuncionario"];
         //Informar a Stored Produre e seus Parâmetros

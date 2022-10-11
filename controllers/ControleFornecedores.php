@@ -57,7 +57,7 @@ class FornecedoresResHandler extends SimpleRest{
 
     public function FornecedoresConsultar(){
 
-        if(!empty($_POST["txtnomeFornecedor"])){
+        if(isset($_POST["txtnomeFornecedor"])){
 
             $nome = $_POST["txtnomeFornecedor"];
         //Informar a Stored Produre e seus Parâmetros

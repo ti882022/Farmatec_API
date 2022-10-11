@@ -50,7 +50,7 @@ class PedidosResHandler extends SimpleRest{
     }
 
     public function PedidosConsultar(){
-        if(!empty($_POST["txtnumpedido"])){
+        if(isset($_POST["txtnumpedido"])){
 
             $numpedido = $_POST["txtnumpedido"];
             $cpf = $_POST["txtcpf"];
