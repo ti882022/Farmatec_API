@@ -112,11 +112,11 @@ class BdTurmaConect{
 
                //passagem de parametro 
                foreach($array as $key =>$value){
-                   $stmt->bingVakue($key,$value);
+                   $stmt->bindValue($key,$value);
                }
 
                //executar a stored procedure
-               $stmt ->exacute();
+               $stmt ->execute();
             
                //while será um looping
 
