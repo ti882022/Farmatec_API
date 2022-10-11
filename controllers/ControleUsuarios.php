@@ -54,7 +54,7 @@ class UsuariosResHandler extends SimpleRest{
 
     public function UsuarioConsultar(){
 
-        if(!empty($_POST["txtusuario"])){
+        if(isset($_POST["txtusuario"])){
 
             $usuario = $_POST["txtusuario"];
         //Informar a Stored Produre e seus Parâmetros

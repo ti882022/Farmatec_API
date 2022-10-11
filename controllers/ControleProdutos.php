@@ -97,7 +97,7 @@ class ProdutosResHandler extends SimpleRest{
 
     public function ProdutosConsultar(){
 
-        if(!empty($_POST["txtcategoria"])){
+        if(isset($_POST["txtcategoria"])){
 
             $categoria = $_POST["txtcategoria"];
         //Informar a Stored Produre e seus Parâmetros

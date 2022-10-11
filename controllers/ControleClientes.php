@@ -35,14 +35,13 @@ class ClientesResHandler extends SimpleRest{
 
              $rawData = $dbcontroller->executeProcedure($query,$array);
             
-            //Verificar se o retorno esta "vazio"
             if(empty($rawData)){
                 $statusCode = 404;
                 $rawData = array('sucesso' => 0);
             }
             else{
                 $statusCode = 200;
-                $rawData = array('sucesso' => 1);
+                
             }
             
             $requestContentType = $_POST['HTTP_ACCEPT'];
@@ -60,7 +59,7 @@ class ClientesResHandler extends SimpleRest{
 
     public function ClientesConsultar(){
 
-        if(!empty($_POST["txtnomeCliente"])){
+        if(isset($_POST["txtnomeCliente"])){
 
             $nome = $_POST["txtnomeCliente"];
             $cpf = $_POST["txtcpfCliente"];
