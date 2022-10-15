@@ -13,20 +13,21 @@ class PedidosResHandler extends SimpleRest{
 
     public function PedidosIncluir(){
 
-        if(isset($_POST["txtnome"])) {
+        if(isset($_POST["txtnomecliente"])) {
 
-            $nome=$_POST["txtnomecliente"];
+            $nomecliente=$_POST["txtnomecliente"];
             $canal=$_POST['txtcanal'];
             $forma=$_POST['txtforma'];
             $codfuncionario=$_POST['txtcodfuncionario'];
             $produto=$_POST['txtproduto'];
 
-            $query="CALL spInserirPedidos(:pnome,:pcanal,:pforma,:pcodigofuncionario,:pproduto,@pnumeropedido)";
-            $array = array(":pnome"=>"{$nome}",":pcanal"=>"{$canal}",":pforma"=>"{$forma}",":pcodigofuncionario"=>"{$codfuncionario}",":pproduto"=>"{$produto}");
+            $query="CALL spInserirPedidos(:pnomecliente,:pcanal,:pforma,:pcodigofuncionario,:pproduto,@pnumeropedido)";
+            $array = array(":pnomecliente"=>"{$nomecliente}",":pcanal"=>"{$canal}",":pforma"=>"{$forma}",":pcodigofuncionario"=>"{$codfuncionario}",":pproduto"=>"{$produto}");
             $final = "SELECT @pnumeropedido as numeropedido";
-             $dbcontroller = new BdturmaConect();
+            
+            $dbcontroller = new BdturmaConect();
 
-             $rawData = $dbcontroller->executeProcedureOut($query,$array,$final);
+            $rawData = $dbcontroller->executeProcedureOut($query,$array,$final);
             
             if(empty($rawData)){
                 $statusCode = 404;
@@ -40,7 +41,7 @@ class PedidosResHandler extends SimpleRest{
             $this -> setHttpHeaders($requestContentType, $statusCode);
             $result["RetornoDados"] = $rawData;
 
-            if(strpos($requestContentType,'application/Json') !==false){
+            if(strpos($requestContentType,'application/Json') !== false){
                 $response = $this->encodeJson($result);
                 echo $response;
             }
