@@ -12,7 +12,7 @@ class BdTurmaConect{
     public $database = "bdfarmacia"; 
 
 
-    function connectDB() {
+        function connectDB() {
         //tratamento de exceções
         try{
             $this -> conn= new PDO ("mysql:host={$this->host};
@@ -31,11 +31,7 @@ class BdTurmaConect{
             echo "Mensagem:". utf8_encode($e->getMessage())."\n";
         }
 
-    }
-    function disconnectDB(){
-        $this -> conn = NULL;
-    }
-
+        }
         //Metodo para executar intruções usadas nas inserções e modificação dos dados
         function executeQuery($query){
             try{
@@ -54,9 +50,8 @@ class BdTurmaConect{
             }
             return $resultado;
         }
-
          //Metodo para executar intruções usadas nas consultas dos dados
-         function executeSelectQuery($query){
+        function executeSelectQuery($query){
              try{
                 $conn = $this->connectDB();
                 $resultado = $this->conn->query($query);
@@ -109,21 +104,16 @@ class BdTurmaConect{
                $conn = $this->connectDB();
               //prepare para execultar sa stored procedure
                $stmt = $this->conn->prepare($query);
-
                //passagem de parametro 
-               foreach($array as $key =>$value){
-                   $stmt->bingVakue($key,$value);
+               foreach($array as $key => $value){
+                   $stmt->bindValue($key,$value);
                }
-
                //executar a stored procedure
-               $stmt ->exacute();
-            
+               $stmt ->execute();
                //while será um looping
-
                while ($linha = $stmt->fetch(PDO::FETCH_ASSOC )){
-                   $resultset[] = $linha;
-               }
-              
+                $resultset[] = $linha;
+               }              
             }
 
            catch(PDOException $e){
