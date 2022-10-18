@@ -73,9 +73,9 @@ class BdTurmaConect{
                 die(print_r($e->getMessage()));
             }
 
-         }
+        }
             
-         function executeBuscarCodigoQuery($query){
+        function executeBuscarCodigoQuery($query){
             try{
                 $conn = $this->connectDB();
                 $resultado = $this->conn->prepare($query);
