@@ -172,6 +172,50 @@ class UsuariosResHandler extends SimpleRest{
 
     }
 
+    public function UsuariosAtualizar(){
+
+        if(!empty($_POST["txtusuario"])){
+
+            $usuario = $_POST["txtusuario"];
+            $email = $_POST["txtemail"];
+            $classe = $_POST["txtclasse"];
+            $logado = $_POST["txtlogado"];
+
+        //Informar a Stored Produre e seus Parâmetros
+        $query="CALL spAtualizarUsuarios(:pusuario,:pemail,:pclasseusuario,:plogado)";
+
+        //Definir o conjunto de dados
+        $array = array(":pusuario"=>"{$usuario}",":pemail"=>"{$email}",":pclasseusuario"=>"{$classe}",":plogado"=>"{$logado}");
+
+            //Instanciar a classe BdTurmaConect
+            $dbcontroller = new BdturmaConect ();
+
+            //Chamar o método
+            $rawData = $dbcontroller->executeProcedure($query,$array);
+
+            //Verificar se o retorno está "Vazio"
+            if(empty($rawData)){
+                $statusCode = 404;
+                $rawData = array('sucesso'=> 0);
+            }
+            else{
+                $statusCode = 200;
+            }
+            $requestContentType = $_POST['HTTP_ACCEPT'];
+            $this ->setHttpHeaders($requestContentType, $statusCode);
+
+            $Result["RetornoDados"] = $rawData;
+
+            if(strpos($requestContentType,'application/Json')!== false){
+                $response = $this -> encodeJson($Result);
+                echo $response;
+
+            }
+
+        }
+
+    }
+
     public function TrocaSenha(){
 
         if(!empty($_POST["txtnome"])){
@@ -222,7 +266,6 @@ class UsuariosResHandler extends SimpleRest{
     }
 }
 
-    
     if(isset($_GET["page_key"])){
         $page_key = $_GET["page_key"];
     }
@@ -271,7 +314,12 @@ switch($page_key){
     case "Trocar":
         $Usuarios = new UsuariosResHandler();
         $Usuarios -> TrocaSenha();
-        break;   
+        break;
+
+    case "Atualizar":
+        $Usuarios = new UsuariosResHandler();
+        $Usuarios -> UsuariosAtualizar();
+        break;  
 }
 
 ?>
