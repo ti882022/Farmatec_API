@@ -19,10 +19,12 @@ class PedidosResHandler extends SimpleRest{
             $canal=$_POST['txtcanal'];
             $forma=$_POST['txtforma'];
             $codfuncionario=$_POST['txtcodfuncionario'];
+            $datapgto=$_POST['txtdpgto'];
+            $dataenvi=$_POST['txtdenvio'];
             $produto=$_POST['txtproduto'];
 
-            $query="CALL spInserirPedidos(:pnomecliente,:pcanal,:pforma,:pcodigofuncionario,:pproduto,@pnumeropedido)";
-            $array = array(":pnomecliente"=>"{$nomecliente}",":pcanal"=>"{$canal}",":pforma"=>"{$forma}",":pcodigofuncionario"=>"{$codfuncionario}",":pproduto"=>"{$produto}");
+            $query="CALL spInserirPedidos(:pnomecliente,:pcanal,:pforma,:pcodigofuncionario,:pdpgto,:pdenvio,:pproduto,@pnumeropedido)";
+            $array = array(":pnomecliente"=>"{$nomecliente}",":pcanal"=>"{$canal}",":pforma"=>"{$forma}",":pcodigofuncionario"=>"{$codfuncionario}",":pdpgto"=>"{$datapgto}",":pdenvio"=>"{$dataenvi}",":pproduto"=>"{$produto}");
             $final = "SELECT @pnumeropedido as numeropedido";
             
             $dbcontroller = new BdturmaConect();

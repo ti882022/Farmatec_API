@@ -21,12 +21,11 @@ class ProdutosResHandler extends SimpleRest{
             $categoria=$_POST['txtcategoria'];
             $unidade=$_POST['txtunidade'];
             $estoquemin=$_POST['txtestoquemin'];
-            $imagem=$_POST['txtimagem'];
             $preco=$_POST['txtpreco'];
 
 
-            $query="CALL spInserirProdutos(:pdescricao,:pmarca,:pfornecedor,:pcategoria,:punidade,:pestoquemin,:pimagem ,:ppreco)";
-            $array = array(":pdescricao"=>"{$descricao}",":pmarca"=>"{$marca}",":pfornecedor"=>"{$fornecedor}",":pcategoria"=>"{$categoria}",":punidade"=>"{$unidade}",":pestoquemin"=>"{$estoquemin}",":pimagem"=>"{$imagem}",":ppreco"=>"{$preco}",);
+            $query="CALL spInserirProdutos(:pdescricao,:pmarca,:pfornecedor,:pcategoria,:punidade,:pestoquemin,:ppreco)";
+            $array = array(":pdescricao"=>"{$descricao}",":pmarca"=>"{$marca}",":pfornecedor"=>"{$fornecedor}",":pcategoria"=>"{$categoria}",":punidade"=>"{$unidade}",":pestoquemin"=>"{$estoquemin}",":ppreco"=>"{$preco}",);
             //Instanciar a classe BdTurmaConnect
              $dbcontroller = new BdturmaConect();
 
@@ -35,11 +34,10 @@ class ProdutosResHandler extends SimpleRest{
             //Verificar se o retorno esta "vazio"
             if(empty($rawData)){
                 $statusCode = 404;
-                $rawData = array('codigo' => 0);
+                $rawData = array('sucesso' => 0);
             }
             else{
                 $statusCode = 200;
-                $rawData = array('codigo' => 1);
             }
             
             $requestContentType = $_POST['HTTP_ACCEPT'];

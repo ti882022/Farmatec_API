@@ -39,7 +39,7 @@ class FornecedoresResHandler extends SimpleRest{
             }
             else{
                 $statusCode = 200;
-                $rawData = array('sucesso' => 1);
+               
             }
             
             $requestContentType = $_POST['HTTP_ACCEPT'];
