@@ -161,6 +161,40 @@ class ProdutosResHandler extends SimpleRest{
         }
     }
 
+    public function ProdutosConsultarWeb(){
+
+        if(isset($_POST["txtcodprod"])){
+        
+        $codprod = $_POST["txtcodprod"];
+
+        //Informar a Stored Produre e seus Parâmetros
+        $query="CALL spConsultarProdutoscod(:pcodprod,:pdescricao)";
+        //Definir o conjunto de dados
+        $array = array(":pcodprod"=>"{$codprod}");
+            //Instanciar a classe BdTurmaConect
+            $dbcontroller = new BdturmaConect ();
+            //Chamar o método
+            $rawData = $dbcontroller->executeProcedure($query,$array);
+            //Verificar se o retorno está "Vazio"
+            if(empty($rawData)){
+                $statusCode = 404;
+                $rawData = array('sucesso'=> 0);
+            }
+            else{
+                $statusCode = 200;
+            }
+            $requestContentType = $_POST['HTTP_ACCEPT'];
+            $this ->setHttpHeaders($requestContentType, $statusCode);
+
+            $Result["RetornoDados"] = $rawData;
+
+            if(strpos($requestContentType,'application/Json')!== false){
+                $response = $this -> encodeJson($Result);
+                echo $response;
+            }
+        }
+    }
+
     public function AtualizarPreco(){
             if(!empty($_POST["txtcodprod"])){
 
