@@ -20,7 +20,8 @@ RewriteRule ^produtos/incluir/$ controllers/ControleProdutos.php?page_key=Inclui
 RewriteRule ^produtos/movimentar/$ controllers/ControleProdutos.php?page_key=Movimentar [QSA]
 RewriteRule ^produtos/atualizarp/$ controllers/ControleProdutos.php?page_key=Atualizar [QSA]
 RewriteRule ^produtos/listar/$ controllers/ControleProdutos.php?page_key=Consultar [QSA]
-RewriteRule ^produtos/listarcod/$ controllers/ControleProdutos.php?page_key=Listar [QSA]
+RewriteRule ^produtos/listarcod/$ controllers/ControleProdutos.php?page_key=ConsultarCod [QSA]
+RewriteRule ^produtos/listarweb/$ controllers/ControleProdutos.php?page_key=ConsultarWeb [QSA]
 RewriteRule ^pedidos/incluir/$ controllers/ControlePedidos.php?page_key=Incluir [QSA]
 RewriteRule ^pedidos/listar/$ controllers/ControlePedidos.php?page_key=Consultar [QSA]
 
