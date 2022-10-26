@@ -281,10 +281,14 @@ switch($page_key){
         $Produtos = new ProdutosResHandler();
         $Produtos -> AtualizarPreco();
         break;
-    case "Listar":
+    case "ConsultarCod":
         $Produtos = new ProdutosResHandler();
         $Produtos -> ProdutosConsultarcod();
         break;
+    case "ConsultarWeb":
+        $Produtos = new ProdutosResHandler();
+        $Produtos -> ProdutosConsultarWeb();
+        break;    
 
 }
 
