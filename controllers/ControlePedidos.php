@@ -83,6 +83,37 @@ class PedidosResHandler extends SimpleRest{
         }
     }
 
+    public function PedidosConcluir(){
+        if(isset($_POST["txtnumpedido"])){
+
+            $numpedido = $_POST["txtnumpedido"];
+            $cpf = $_POST["txtcpf"];
+
+        $query="CALL spConcluirPedidos(:npedido,:pcpf)";
+        $array = array(":npedido"=>"{$numpedido}",":pcpf"=>"{$cpf}");
+            $dbcontroller = new BdturmaConect ();
+            $rawData = $dbcontroller->executeProcedure($query,$array);
+            if(empty($rawData)){
+                $statusCode = 404;
+                $rawData = array('sucesso'=> 0);
+            }
+            else{
+                $statusCode = 200;
+            }
+            $requestContentType = $_POST['HTTP_ACCEPT'];
+            $this ->setHttpHeaders($requestContentType, $statusCode);
+
+            $Result["RetornoDados"] = $rawData;
+
+            if(strpos($requestContentType,'application/Json')!== false){
+                $response = $this -> encodeJson($Result);
+                echo $response;
+
+            }
+
+        }
+    }
+
     public function encodeJson($responseData){
         $JsonResponse = json_encode($responseData);
         return $JsonResponse;
@@ -122,6 +153,10 @@ switch($page_key){
     case "Consultar":
         $Pedidos = new PedidosResHandler();
         $Pedidos -> PedidosConsultar();
+        break;
+    case "Concluir":
+        $Pedidos = new PedidosResHandler();
+        $Pedidos -> PedidosConcluir();
         break;
 }
 
