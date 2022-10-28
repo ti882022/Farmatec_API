@@ -22,8 +22,11 @@ RewriteRule ^produtos/atualizarp/$ controllers/ControleProdutos.php?page_key=Atu
 RewriteRule ^produtos/listar/$ controllers/ControleProdutos.php?page_key=Consultar [QSA]
 RewriteRule ^produtos/listarcod/$ controllers/ControleProdutos.php?page_key=ConsultarCod [QSA]
 RewriteRule ^produtos/listarweb/$ controllers/ControleProdutos.php?page_key=ConsultarWeb [QSA]
+RewriteRule ^produtos/retirar/$ controllers/ControlePedidos.php?page_key=Retirar [QSA]
 RewriteRule ^pedidos/incluir/$ controllers/ControlePedidos.php?page_key=Incluir [QSA]
 RewriteRule ^pedidos/listar/$ controllers/ControlePedidos.php?page_key=Consultar [QSA]
+RewriteRule ^pedidos/concluir/$ controllers/ControlePedidos.php?page_key=Concluir [QSA]
+
 
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
