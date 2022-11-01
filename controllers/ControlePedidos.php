@@ -88,9 +88,10 @@ class PedidosResHandler extends SimpleRest{
 
             $numpedido = $_POST["txtnumpedido"];
             $cpf = $_POST["txtcpf"];
+            $formaPgto = $_POST["txtforma"];
 
-        $query="CALL spConcluirPedidos(:npedido,:pcpf)";
-        $array = array(":npedido"=>"{$numpedido}",":pcpf"=>"{$cpf}");
+        $query="CALL spConcluirPedidos(:npedido,:pcpf,:pforma)";
+        $array = array(":npedido"=>"{$numpedido}",":pcpf"=>"{$cpf}",,":pforma"=>"{$formaPgto}");
             $dbcontroller = new BdturmaConect ();
             $rawData = $dbcontroller->executeProcedure($query,$array);
             if(empty($rawData)){
