@@ -110,9 +110,7 @@ class PedidosResHandler extends SimpleRest{
             if(strpos($requestContentType,'application/Json')!== false){
                 $response = $this -> encodeJson($Result);
                 echo $response;
-
             }
-
         }
     }
 
