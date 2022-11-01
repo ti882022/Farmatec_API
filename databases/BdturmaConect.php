@@ -110,18 +110,21 @@ class BdTurmaConect{
                }
                //executar a stored procedure
                $stmt ->execute();
+               $stmt -> closeCursor();
+
+               $resultado = $this->conn->prepare($final);
+               $resultado ->execute();
                //while será um looping
-               while ($linha = $stmt->fetch(PDO::FETCH_ASSOC )){
-                $resultset[] = $linha;
-               }              
+               while ($linha = $resultado->fetch(PDO::FETCH_ASSOC )){
+                $resultset[] = array_map('utf8_encode',$linha);
+               }
             }
 
            catch(PDOException $e){
-               die(print_r($e->getMessage()));
+            die(print_r($e->getMessage()));
            }
 
            return $resultset;
-
         }
 
         function executeProcedure($query,$array){
